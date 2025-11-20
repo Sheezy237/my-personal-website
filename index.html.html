@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Profile - Ghana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #006b3f; /* Ghana green */
+            --secondary: #fcd116; /* Ghana gold */
+            --accent: #ce1126; /* Ghana red */
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+
+        body {
+            background: linear-gradient(135deg, #006b3f 0%, #fcd116 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+            animation: fadeIn 1s ease;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .ghana-flag {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+            height: 30px;
+            width: 100%;
+        }
+
+        .ghana-flag div {
+            height: 100%;
+        }
+
+        .red { background-color: #ce1126; flex: 1; }
+        .gold { background-color: #fcd116; flex: 1; }
+        .green { background-color: #006b3f; flex: 1; }
+        .black-star {
+            background-color: #000;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 10px;
+        }
+
+        .black-star:after {
+            content: "★";
+            color: #fcd116;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+        }
+
+        .profile-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .profile-card {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            animation: slideUp 0.8s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+            margin: 0 auto 20px;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .info-group {
+            margin-bottom: 25px;
+        }
+
+        .info-group h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-group h3 i {
+            color: var(--accent);
+        }
+
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .hobby-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .hobby-item:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .hobby-item i {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .location-map {
+            width: 100%;
+            height: 250px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-style: italic;
+            background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f0f0f0"/><path d="M50 10 C30 10, 10 30, 10 50 C10 70, 30 90, 50 90 C70 90, 90 70, 90 50 C90 30, 70 10, 50 10 Z" fill="none" stroke="%23006b3f" stroke-width="2"/><circle cx="50" cy="50" r="5" fill="%23ce1126"/></svg>');
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-pin {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--accent);
+            font-size: 2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+        }
+
+        .contact-item i {
+            color: var(--primary);
+            width: 20px;
+        }
+
+        .gender-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            color: var(--secondary);
+        }
+
+        .ghana-theme {
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+            }
+            
+            header h1 {
+                font-size: 2.2em;
+            }
+            
+            .profile-image {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .hobbies-grid {
+                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sheila Owusua Sackey</h1>
+            <p>Web Developer</p>
+            <div class="ghana-flag">
+                <div class="red"></div>
+                <div class="gold"></div>
+                <div class="black-star"></div>
+                <div class="gold"></div>
+                <div class="green"></div>
+            </div>
+        </header>
+
+        <div class="profile-section">
+            <div class="profile-card">
+                <img src="myphoto.jpg" 
+                     alt="Profile Picture" class="profile-image">
+                
+                <div class="info-group">
+                    <h3><i class="fas fa-user"></i> Personal Information</h3>
+                    <p><strong>Name:</strong> Sheila Owusua Sackey</p>
+                    <p><strong>Gender:</strong> <span class="gender-badge">Female</span></p>
+                    <p><strong>Occupation:</strong> Senior Web Developer</p>
+                    <p><strong>Nationality:</strong> Ghanaian</p>
+                    <div class="ghana-theme">
+                        Proudly Made in Ghana 🇬🇭
+                    </div>
+                </div>
+
+                <div class="info-group">
+                    <h3><i class="fas fa-address-card"></i> Contact Information</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>sacksheowu206@gmail.com.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+233501138395</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.sheilasackey.dev.gh</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                <div class="info-group">
+                    <h3><i class="fas fa-map-marker-alt"></i> Address</h3>
+                    <p>24 Nii Odoi Street<br>
+                       Asylum Down, Accra<br>
+                       Greater Accra Region<br>
+                    </p>
+                </div>
+
+                <div class="info-group">
+                    <h3><i class="fas fa-map"></i> Location - Asylum Down</h3>
+                    <div class="location-map">
+                        <div class="map-pin">
+                            <i class="fas fa-map-pin"></i>
+                        </div>
+                        Asylum Down, Accra - Ghana
+                    </div>
+                    <p style="margin-top: 10px; font-size: 0.9em;">
+                        <strong>Nearby landmarks:</strong> Kojo Thompson Road, Ring Road Central, Kwame Nkrumah Interchange
+                    </p>
+                </div>
+
+                <div class="info-group">
+                    <h3><i class="fas fa-info-circle"></i> About Myself</h3>
+                    <p>I'm a passionate web developer based in Accra, Ghana  I specialize in front-end development with a focus on user experience.</p>
+                    <p style="margin-top: 10px;">When I'm not coding, you can find me exploring Accra's vibrant food scene, playing video games, or enjoying highlife music at local events.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-card">
+            <div class="info-group">
+                <h3><i class="fas fa-heart"></i> My Hobbies & Interests</h3>
+                <div class="hobbies-grid">
+                    <div class="hobby-item">
+                        <i class="fas fa-futbol"></i>
+                        <h4>Football</h4>
+                        <p>Playing & watching</p>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-laptop-code"></i>
+                        <h4>Coding</h4>
+                        <p>Web development</p>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-utensils"></i>
+                        <h4>Ghanaian Cuisine</h4>
+                        <p>Cooking & enjoying</p>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-music"></i>
+                        <h4>Music</h4>
+                        <p>Highlife & Afrobeats</p>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-hiking"></i>
+                        <h4>Travel</h4>
+                        <p>Exploring Ghana</p>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-camera"></i>
+                        <h4>Photography</h4>
+                        <p>Accra cityscapes</p>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-book"></i>
+                        <h4>Reading</h4>
+
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-users"></i>
+                        <h4>Community</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Connect with me on social media</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.9em;">&copy; 2023 Sheila Sackey. Accra, Ghana.</p>
+        </footer>
+    </div>
+</body>
+</html>
